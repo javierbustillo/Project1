@@ -36,7 +36,7 @@ public class Customer {
 		return patience;
 	}
 	
-	public Boolean getSatisfied() {
+	public Boolean hasLeft() {
 		return satisfied;
 	}
 	
