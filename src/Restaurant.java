@@ -69,6 +69,10 @@ public abstract class Restaurant {
 		return customersInRestaurant>0;
 	}
 	
+	public Customer[] getCustomers() {
+		return customers;
+	}
+	
 	
 
 }
