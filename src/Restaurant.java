@@ -73,6 +73,10 @@ public abstract class Restaurant {
 		return customers;
 	}
 	
+	public void addProfit(float profit) {
+		this.profit += profit;
+	}
+	
 	
 
 }
