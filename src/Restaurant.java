@@ -40,8 +40,8 @@ public abstract class Restaurant {
 			receiveCustomers();
 			if(hasNextCustomer()) {
 				if(isKitchenAvailable()) {
-					takeNewOrder();
 					updateCustomerStatus();
+					takeNewOrder();
 				}
 				else {
 					setWait(getWait()-1);
@@ -66,6 +66,10 @@ public abstract class Restaurant {
 		return profit;
 	}
 	
+	public void setUnsatisfiedCustomers(int cust) {
+		unsatisfiedCustomers = cust;
+	}
+	
 	public int getUnsatisfiedCustomers() {
 		return unsatisfiedCustomers;
 	}
@@ -88,6 +92,14 @@ public abstract class Restaurant {
 	
 	public int getWait() {
 		return wait;
+	}
+	
+	public void setCustomersInRestaurant(int size) {
+		customersInRestaurant = size;
+	}
+	
+	public int getCustomersInRestaurant() {
+		return customersInRestaurant;
 	}
 	
 	
