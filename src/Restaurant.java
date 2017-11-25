@@ -3,7 +3,7 @@ public abstract class Restaurant {
 	//instance variables
 	private Customer[] customers;
 	private int currentTurn;
-	private float profit;
+	private double profit;
 	private int unsatisfiedCustomers;
 	private Boolean isOpen;
 	private int customersInRestaurant;
@@ -62,7 +62,7 @@ public abstract class Restaurant {
 		return currentTurn;
 	}
 	
-	public float getProfit() {
+	public double getProfit() {
 		return profit;
 	}
 	
@@ -82,7 +82,7 @@ public abstract class Restaurant {
 		return customers;
 	}
 	
-	public void addProfit(float profit) {
+	public void addToProfit(double profit) {
 		this.profit += profit;
 	}
 	

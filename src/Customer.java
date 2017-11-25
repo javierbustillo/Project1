@@ -4,11 +4,11 @@ public class Customer {
 	private int arrival;
 	private String id;
 	private int timeToPrepare;
-	private float costOfOrder;
+	private double costOfOrder;
 	private int patience;
 	private Boolean satisfied;
 	
-	public Customer(int arrival, String id, int timeToPrepare, float costOfOrder, int patience) {
+	public Customer(int arrival, String id, int timeToPrepare, double costOfOrder, int patience) {
 		this.arrival = arrival;
 		this.id = id;
 		this.timeToPrepare = timeToPrepare;
@@ -28,7 +28,7 @@ public class Customer {
 		return timeToPrepare;
 	}
 	
-	public float getCostOfOrder() {
+	public double getCostOfOrder() {
 		return costOfOrder;
 	}
 	
