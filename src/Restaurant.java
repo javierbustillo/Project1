@@ -7,6 +7,7 @@ public abstract class Restaurant {
 	private int unsatisfiedCustomers;
 	private Boolean isOpen;
 	private int customersInRestaurant;
+	private int wait;
 	
 	public Restaurant(Customer[] customers) {
 		this.customers = customers;
@@ -14,6 +15,7 @@ public abstract class Restaurant {
 		profit = 0;
 		unsatisfiedCustomers = 0;
 		isOpen = true;
+		wait = 0;
 	}
 	
 	public void closeRestaurant() {
@@ -40,6 +42,9 @@ public abstract class Restaurant {
 				if(isKitchenAvailable()) {
 					takeNewOrder();
 					updateCustomerStatus();
+				}
+				else {
+					setWait(getWait()-1);
 				}
 				nextTurn();
 			}
@@ -75,6 +80,14 @@ public abstract class Restaurant {
 	
 	public void addProfit(float profit) {
 		this.profit += profit;
+	}
+	
+	public void setWait(int wait) {
+		this.wait = wait;
+	}
+	
+	public int getWait() {
+		return wait;
 	}
 	
 	
