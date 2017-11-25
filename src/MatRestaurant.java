@@ -27,7 +27,7 @@ public class MatRestaurant extends Restaurant {
 			}
 			else {
 				
-				if((customerLine.top().getArrival() + customerLine.top().getPatience()) <= this.getCurrentTurn()) {
+				if((customerLine.top().getArrival() + customerLine.top().getPatience()) < this.getCurrentTurn()) {
 					customerLine.pop();
 					this.setCustomersInRestaurant(this.getCustomersInRestaurant()-1);
 					this.setUnsatisfiedCustomers(this.getUnsatisfiedCustomers()+1);
