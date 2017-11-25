@@ -54,7 +54,6 @@ public class MatRestaurant extends Restaurant {
 			if(this.getCurrentTurn() == customerList[i].getArrival()) {
 				customerLine.push(customerList[i]);
 				this.setCustomersInRestaurant(this.getCustomersInRestaurant()+1);
-				System.out.println(customerLine.top().getId());
 			}
 		}
 		
