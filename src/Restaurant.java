@@ -30,9 +30,12 @@ public abstract class Restaurant {
 	
 	public abstract Boolean isKitchenAvailable();
 	
+	public abstract void receiveCustomers();
+	
 	
 	public void simulate() {
 		while(isOpen()) {
+			receiveCustomers();
 			if(hasNextCustomer()) {
 				if(isKitchenAvailable()) {
 					takeNewOrder();
