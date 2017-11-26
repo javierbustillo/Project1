@@ -6,22 +6,28 @@ public class MaxRestaurant extends Restaurant {
 	public MaxRestaurant(Customer[] customers) {
 		super(customers);
 		customersInLine = new ArrayList<Customer>();
+		interactionCounter=0;
 		
 	}
 	
 	@Override
 	public void takeNewOrder() {
 		if(this.getWait() == 0 && customersInLine.size()>0) {
+			int indexOfMax=0;
 			double maxProfit = customersInLine.get(0).getCostOfOrder();
 			Customer maxCustomer = customersInLine.get(0);
 			for(int i=0;i<customersInLine.size();i++) {
 				if(maxProfit<customersInLine.get(i).getCostOfOrder()) {
 					maxProfit = customersInLine.get(i).getCostOfOrder();
 					maxCustomer = customersInLine.get(i);
+					indexOfMax = i;
 				}
 			}
 			if(maxCustomer.equals(customersInLine.get(0))) {
 				customersInLine.remove(0);
+			}
+			else {
+				customersInLine.remove(indexOfMax);
 			}
 			this.addToProfit(maxCustomer.getCostOfOrder());
 			this.setWait(maxCustomer.getTimeToPrepare());
@@ -56,6 +62,7 @@ public class MaxRestaurant extends Restaurant {
 			if(this.getCurrentTurn() == customerList[i].getArrival()) {
 				customersInLine.add(customerList[i]);
 				this.setCustomersInRestaurant(this.getCustomersInRestaurant()+1);
+				interactionCounter++;
 			}
 		}
 
