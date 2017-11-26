@@ -9,6 +9,7 @@ public abstract class Restaurant {
 	protected int customersInRestaurant;
 	protected int wait;
 	protected int interactionCounter;
+
 	
 	public Restaurant(Customer[] customers) {
 		this.customers = customers;
@@ -31,7 +32,9 @@ public abstract class Restaurant {
 	
 	public abstract void updateCustomerStatus();
 	
-	public abstract Boolean isKitchenAvailable();
+	public boolean isKitchenAvailable(){
+		return wait==0;
+	}
 	
 	public abstract void receiveCustomers();
 	
@@ -40,6 +43,7 @@ public abstract class Restaurant {
 		while(isOpen()) {
 			receiveCustomers();
 			if(hasNextCustomer()) {
+
 				if(isKitchenAvailable()) {
 					updateCustomerStatus();
 					takeNewOrder();

@@ -8,4 +8,5 @@ public interface RestaurantStack<E> {
 	public int size();
 	
 	public E top();
+	
 }
