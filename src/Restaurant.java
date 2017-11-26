@@ -1,13 +1,13 @@
 
 public abstract class Restaurant {
 	//instance variables
-	private Customer[] customers;
-	private int currentTurn;
+	protected Customer[] customers;
+	protected int currentTurn;
 	private double profit;
-	private int unsatisfiedCustomers;
+	protected int unsatisfiedCustomers;
 	private Boolean isOpen;
-	private int customersInRestaurant;
-	private int wait;
+	protected int customersInRestaurant;
+	protected int wait;
 	protected int interactionCounter;
 	
 	public Restaurant(Customer[] customers) {
