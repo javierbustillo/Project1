@@ -1,13 +1,13 @@
 
 public abstract class Restaurant {
 	//instance variables
-	private Customer[] customers;
-	private int currentTurn;
+	protected Customer[] customers;
+	protected int currentTurn;
 	private double profit;
-	private int unsatisfiedCustomers;
+	protected int unsatisfiedCustomers;
 	private Boolean isOpen;
-	private int customersInRestaurant;
-	private int wait;
+	protected int customersInRestaurant;
+	protected int wait;
 	
 	public Restaurant(Customer[] customers) {
 		this.customers = customers;
@@ -30,7 +30,9 @@ public abstract class Restaurant {
 	
 	public abstract void updateCustomerStatus();
 	
-	public abstract Boolean isKitchenAvailable();
+	public boolean isKitchenAvailable(){
+		return wait==0;
+	}
 	
 	public abstract void receiveCustomers();
 	
@@ -39,13 +41,12 @@ public abstract class Restaurant {
 		while(isOpen()) {
 			receiveCustomers();
 			if(hasNextCustomer()) {
+
 				if(isKitchenAvailable()) {
 					updateCustomerStatus();
 					takeNewOrder();
 				}
-				else {
-					setWait(getWait()-1);
-				}
+				setWait(getWait()-1);
 				nextTurn();
 			}
 			else {
