@@ -8,6 +8,8 @@ public abstract class Restaurant {
 	private Boolean isOpen;
 	protected int customersInRestaurant;
 	protected int wait;
+	protected int interactionCounter;
+
 	
 	public Restaurant(Customer[] customers) {
 		this.customers = customers;
@@ -76,7 +78,7 @@ public abstract class Restaurant {
 	}
 	
 	public Boolean hasNextCustomer() {
-		return customersInRestaurant>0;
+		return interactionCounter < customers.length  || customersInRestaurant>0;
 	}
 	
 	public Customer[] getCustomers() {

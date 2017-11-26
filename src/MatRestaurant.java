@@ -6,6 +6,7 @@ public class MatRestaurant extends Restaurant {
 	public MatRestaurant(Customer[] customers) {
 		super(customers);
 		customerLine = new SLLRestaurantStack<Customer>();
+		interactionCounter=0;
 	}
 
 	@Override
@@ -54,6 +55,7 @@ public class MatRestaurant extends Restaurant {
 			if(this.getCurrentTurn() == customerList[i].getArrival()) {
 				customerLine.push(customerList[i]);
 				this.setCustomersInRestaurant(this.getCustomersInRestaurant()+1);
+				interactionCounter++;
 			}
 		}
 		
