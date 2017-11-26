@@ -1,7 +1,8 @@
+import java.util.EmptyStackException;
 
 public class SLLRestaurantStack<E> implements RestaurantStack<E>{
 
-	private Node head;
+	private Node<E> head;
 	private int size;
 	
 	public SLLRestaurantStack() {
@@ -12,12 +13,12 @@ public class SLLRestaurantStack<E> implements RestaurantStack<E>{
 	@Override
 	public void push(E e) {
 		if(size==0) {
-			Node tmp = new Node(e, null);
+			Node<E> tmp = new Node<E>(e, null);
 			head = tmp;
 			size++;
 		}
 		else {
-			Node tmp = new Node(e, head);
+			Node<E> tmp = new Node<E>(e, head);
 			head = tmp;
 			size++;
 		}
@@ -30,8 +31,9 @@ public class SLLRestaurantStack<E> implements RestaurantStack<E>{
 			return null;
 		}
 		else {
-			E tmp  = (E) head.getElement();
+			E tmp  = head.getElement();
 			head = head.getNext();
+			size--;
 			return tmp;
 			
 		}
@@ -45,14 +47,20 @@ public class SLLRestaurantStack<E> implements RestaurantStack<E>{
 	@Override
 	public E top() {
 		// TODO Auto-generated method stub
-		return (E) head.getElement();
+		if (size == 0) {
+			return null;
+		}
+		E tmp = head.getElement();
+		
+		return tmp;
+
 	}
 	
 	private class Node<T>{
 		private T element;
-		private Node next;
+		private Node<T> next;
 		
-		public Node(T element, Node next){
+		public Node(T element, Node<T> next){
 			this.element = element;
 			this.next = next;
 		}
@@ -61,11 +69,11 @@ public class SLLRestaurantStack<E> implements RestaurantStack<E>{
 			return element;
 		}
 		
-		public void setNext(Node n) {
+		public void setNext(Node<T> n) {
 			next = n;
 		}
 		
-		public Node getNext() {
+		public Node<T> getNext() {
 			return next;
 		}
 		
