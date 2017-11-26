@@ -6,65 +6,38 @@ public class PatRestaurant extends Restaurant {
 	public PatRestaurant(Customer[] customers){
 		super(customers);
 		restaurantQueue = new SLLRestaurantQueue<Customer>();
+		interactionCounter = 0;
 	}
 	
 	@Override
 	public void takeNewOrder() {
-		
-		System.out.println("Taking new order.");
-		if(wait==0 && restaurantQueue.size()>0) {
-			// TODO Auto-generated method stub
-			Customer customerAttended = restaurantQueue.dequeue();
-			addToProfit(customerAttended.getCostOfOrder());
-			setWait(customerAttended.getTimeToPrepare());
-			System.out.println(customerAttended.getId());
-			System.out.println(customerAttended.getTimeToPrepare());
+		if(restaurantQueue.size()>0&&wait==0){
+			setWait(restaurantQueue.first().getTimeToPrepare());
+			addToProfit(restaurantQueue.dequeue().getCostOfOrder());
 			customersInRestaurant--;
 		}
-		
 	}
 
 	
 	@Override
 	public void updateCustomerStatus() {
-		System.out.println("Updating customers status.");
-
-		// TODO Auto-generated method stub
-		
-		boolean foundNewCustomer = false;
-
-		do{
-			if(restaurantQueue.first()==null){
-				foundNewCustomer=true;
-			}
-			else{
-				Customer tmpCustomer = restaurantQueue.first();
-				if(tmpCustomer.getPatience() + tmpCustomer.getArrival() < currentTurn){
-					restaurantQueue.dequeue();
-					customersInRestaurant--;
-					unsatisfiedCustomers++;
-				}else{
-					foundNewCustomer = true;
-				}
-			}
-		}while(!foundNewCustomer);
-		
+	
+		while(!restaurantQueue.isEmpty()&&restaurantQueue.first().getArrival()+restaurantQueue.first().getPatience()<currentTurn){
+				restaurantQueue.dequeue();
+				unsatisfiedCustomers++;
+				customersInRestaurant--;
+		}
 	}
 
 
 	@Override
 	public void receiveCustomers() {
-		System.out.println("Receiving customers.");
-		// TODO Auto-generated method stub
-		for(int i=0; i<customers.length; i++){
+		//add variable for total customers traveled
+		for(int i=0; i<customers.length&&customers[i].getArrival()<=currentTurn; i++)
 			if(customers[i].getArrival()==currentTurn){
 				restaurantQueue.enqueue(customers[i]);
 				customersInRestaurant++;
-				System.out.println(customers[i].getId());
-			}
-		}	
+				interactionCounter++;
+			}	
 	}
-	
-
-
 }
