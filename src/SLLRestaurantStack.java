@@ -1,5 +1,3 @@
-import java.util.EmptyStackException;
-
 public class SLLRestaurantStack<E> implements RestaurantStack<E>{
 
 	private Node<E> head;
