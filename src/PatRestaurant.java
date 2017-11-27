@@ -2,11 +2,12 @@
 public class PatRestaurant extends Restaurant {
 	
 	private SLLRestaurantQueue<Customer> restaurantQueue;
+	int totalCustomers;
 	
 	public PatRestaurant(Customer[] customers){
 		super(customers);
 		restaurantQueue = new SLLRestaurantQueue<Customer>();
-		interactionCounter = 0;
+		totalCustomers=0;
 	}
 	
 	@Override
@@ -33,11 +34,11 @@ public class PatRestaurant extends Restaurant {
 	@Override
 	public void receiveCustomers() {
 		//add variable for total customers traveled
-		for(int i=0; i<customers.length&&customers[i].getArrival()<=currentTurn; i++)
-			if(customers[i].getArrival()==currentTurn){
+		for(int i=totalCustomers; i<customers.length&&customers[i].getArrival()<=currentTurn; i++){
+				totalCustomers++;
 				restaurantQueue.enqueue(customers[i]);
 				customersInRestaurant++;
-				interactionCounter++;
-			}	
+				interactionCounter++;	
+		}
 	}
 }
