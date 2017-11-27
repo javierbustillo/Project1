@@ -11,7 +11,7 @@ public class main {
 		customers[3] = new Customer(2, "123654", 10, 11.00, 15);
 		customers[4] = new Customer(4, "541739", 10, 2.3, 20);
 		
-		PatRestaurant firstTry = new PatRestaurant(customers);
+		PacRestaurant firstTry = new PacRestaurant(customers);
 		
 		firstTry.simulate();
 		
