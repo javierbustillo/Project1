@@ -27,6 +27,8 @@ public abstract class Restaurant {
 	
 	public void nextTurn() {
 		currentTurn++;
+		if(wait>0)
+			setWait(getWait()-1);
 	}
 	
 	public abstract void takeNewOrder();
@@ -49,7 +51,6 @@ public abstract class Restaurant {
 					updateCustomerStatus();
 					takeNewOrder();
 				}
-				setWait(getWait()-1);
 				nextTurn();
 			}
 			else {
