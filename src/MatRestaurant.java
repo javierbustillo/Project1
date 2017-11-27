@@ -6,7 +6,6 @@ public class MatRestaurant extends Restaurant {
 	public MatRestaurant(Customer[] customers) {
 		super(customers);
 		customerLine = new SLLRestaurantStack<Customer>();
-		interactionCounter=0;
 	}
 
 	@Override

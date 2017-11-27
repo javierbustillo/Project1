@@ -18,6 +18,7 @@ public abstract class Restaurant {
 		unsatisfiedCustomers = 0;
 		isOpen = true;
 		wait = 0;
+		interactionCounter = 0;
 	}
 	
 	public void closeRestaurant() {
