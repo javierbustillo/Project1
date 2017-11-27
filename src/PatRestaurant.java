@@ -1,19 +1,19 @@
 
 public class PatRestaurant extends Restaurant {
 	
-	private SLLRestaurantQueue<Customer> restaurantQueue;
+	private RestaurantQueueList<Customer> customersInLine;
 	
 	public PatRestaurant(Customer[] customers){
 		super(customers);
-		restaurantQueue = new SLLRestaurantQueue<Customer>();
+		customersInLine = new RestaurantQueueList<Customer>();
 	}
 	
 	
 	@Override
 	public void takeNewOrder() {
-		if(restaurantQueue.size()>0&&wait==0){
-			setWait(restaurantQueue.first().getTimeToPrepare());
-			addToProfit(restaurantQueue.dequeue().getCostOfOrder());
+		if(customersInLine.size()>0&&wait==0){
+			setWait(customersInLine.get().getTimeToPrepare());
+			addToProfit(customersInLine.remove().getCostOfOrder());
 			customersInRestaurant--;
 		}
 	}
@@ -21,21 +21,20 @@ public class PatRestaurant extends Restaurant {
 	
 	@Override
 	public void updateCustomerStatus() {
-	
-		while(!restaurantQueue.isEmpty()&&restaurantQueue.first().getArrival()+restaurantQueue.first().getPatience()<currentTurn){
-				restaurantQueue.dequeue();
-				unsatisfiedCustomers++;
-				customersInRestaurant--;
+		while(!customersInLine.isEmpty()&&customersInLine.get(0).getArrival()+customersInLine.get(0).getPatience()<currentTurn){
+			customersInLine.remove(0);
+			unsatisfiedCustomers++;
+			customersInRestaurant--;
 		}
 	}
-
 
 	@Override
 	public void receiveCustomers() {
 		for(int i=interactionCounter; i<customers.length&&customers[i].getArrival()<=currentTurn; i++){
-				restaurantQueue.enqueue(customers[i]);
-				customersInRestaurant++;
-				interactionCounter++;	
-		}
+			customersInLine.add(customers[i]);
+			customersInRestaurant++;
+			interactionCounter++;	
+		}	
+		
 	}
 }
