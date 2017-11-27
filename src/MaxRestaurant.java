@@ -6,8 +6,6 @@ public class MaxRestaurant extends Restaurant {
 	public MaxRestaurant(Customer[] customers) {
 		super(customers);
 		customersInLine = new ArrayList<Customer>();
-		interactionCounter=0;
-		
 	}
 	
 	@Override
