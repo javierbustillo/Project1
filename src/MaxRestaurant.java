@@ -49,7 +49,7 @@ public class MaxRestaurant extends Restaurant {
 	}
 
 	@Override
-	public Boolean isKitchenAvailable() {
+	public boolean isKitchenAvailable() {
 		return this.getWait() == 0;
 	}
 
