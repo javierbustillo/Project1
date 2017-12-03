@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 
 public class PatRestaurant extends Restaurant {
 	
 	private SLLRestaurantQueue<Customer> restaurantQueue;
 	
-	public PatRestaurant(Customer[] customers){
+	public PatRestaurant(ArrayList<Customer> customers){
 		super(customers);
 		restaurantQueue = new SLLRestaurantQueue<Customer>();
 	}
@@ -32,8 +33,8 @@ public class PatRestaurant extends Restaurant {
 
 	@Override
 	public void receiveCustomers() {
-		for(int i=interactionCounter; i<customers.length&&customers[i].getArrival()<=currentTurn; i++){
-				restaurantQueue.enqueue(customers[i]);
+		for(int i=interactionCounter; i<customers.size()&&customers.get(i).getArrival()<=currentTurn; i++){
+				restaurantQueue.enqueue(customers.get(i));
 				customersInRestaurant++;
 				interactionCounter++;	
 		}
