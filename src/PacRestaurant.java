@@ -4,7 +4,7 @@ public class PacRestaurant extends Restaurant {
 	
 	ArrayList<Customer> customersInLine;
 
-	public PacRestaurant(Customer[] customers) {
+	public PacRestaurant(ArrayList<Customer> customers) {
 		super(customers);
 		customersInLine = new ArrayList<Customer>();
 	}
@@ -41,8 +41,8 @@ public class PacRestaurant extends Restaurant {
 	@Override
 	public void receiveCustomers() {
 		// TODO Auto-generated method stub
-		for(int i=interactionCounter; i<customers.length&&customers[i].getArrival()<=currentTurn; i++){
-			customersInLine.add(customers[i]);
+		for(int i=interactionCounter; i<customers.size()&&customers.get(i).getArrival()<=currentTurn; i++){
+			customersInLine.add(customers.get(i));
 			customersInRestaurant++;
 			interactionCounter++;	
 		}	

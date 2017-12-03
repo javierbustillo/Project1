@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 
 public abstract class Restaurant {
 	//instance variables
-	protected Customer[] customers;
+	protected ArrayList<Customer> customers;
 	protected int currentTurn;
 	private double profit;
 	protected int unsatisfiedCustomers;
@@ -11,7 +12,7 @@ public abstract class Restaurant {
 	protected int interactionCounter;
 
 	
-	public Restaurant(Customer[] customers) {
+	public Restaurant(ArrayList<Customer> customers) {
 		this.customers = customers;
 		currentTurn = 1;
 		profit = 0;
@@ -80,10 +81,10 @@ public abstract class Restaurant {
 	}
 	
 	public Boolean hasNextCustomer() {
-		return interactionCounter < customers.length  || customersInRestaurant>0;
+		return interactionCounter < customers.size()  || customersInRestaurant>0;
 	}
 	
-	public Customer[] getCustomers() {
+	public ArrayList<Customer> getCustomers() {
 		return customers;
 	}
 	

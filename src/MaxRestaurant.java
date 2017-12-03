@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class MaxRestaurant extends Restaurant {
 
 	ArrayList<Customer> customersInLine;
-	public MaxRestaurant(Customer[] customers) {
+	public MaxRestaurant(ArrayList<Customer> customers) {
 		super(customers);
 		customersInLine = new ArrayList<Customer>();
 	}
@@ -29,7 +29,7 @@ public class MaxRestaurant extends Restaurant {
 			}
 			this.addToProfit(maxCustomer.getCostOfOrder());
 			this.setWait(maxCustomer.getTimeToPrepare());
-			this.setCustomersInRestaurant(this.getCustomersInRestaurant()-1);
+			customersInRestaurant--;
 
 		}
 		
@@ -41,25 +41,22 @@ public class MaxRestaurant extends Restaurant {
 		for(int i=0;i<customersInLine.size();i++) {
 			if((customersInLine.get(i).getArrival() + customersInLine.get(i).getPatience()) <= this.getCurrentTurn()) {
 				customersInLine.remove(i);
-				this.setCustomersInRestaurant(this.getCustomersInRestaurant()-1);
-				this.setUnsatisfiedCustomers(this.getUnsatisfiedCustomers()+1);
+				customersInRestaurant--;
+				unsatisfiedCustomers++;
 				i=-1;
 			}
 		}
 	}
 
-	@Override
-	public Boolean isKitchenAvailable() {
-		return this.getWait() == 0;
-	}
+	
 
 	@Override
 	public void receiveCustomers() {
-		Customer [] customerList = this.getCustomers();
-		for(int i=0;i<customerList.length;i++) {
-			if(this.getCurrentTurn() == customerList[i].getArrival()) {
-				customersInLine.add(customerList[i]);
-				this.setCustomersInRestaurant(this.getCustomersInRestaurant()+1);
+		ArrayList<Customer> customerList = this.getCustomers();
+		for(int i=0;i<customerList.size();i++) {
+			if(this.getCurrentTurn() == customerList.get(i).getArrival()) {
+				customersInLine.add(customerList.get(i));
+				customersInRestaurant++;
 				interactionCounter++;
 			}
 		}

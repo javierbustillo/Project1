@@ -1,15 +1,17 @@
+import java.util.ArrayList;
 
 public class main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Customer[] customers = new Customer[5];
-		customers[0] = new Customer(1, "451263", 10, 2.30, 15);
-		customers[1] = new Customer(2, "540909", 2, 5.00, 10);
-		customers[2] = new Customer(2, "909028", 5, 1.20,7);
-		customers[3] = new Customer(2, "123654", 10, 11.00, 15);
-		customers[4] = new Customer(4, "541739", 10, 2.3, 20);
+		ArrayList<Customer> customers = new ArrayList<Customer>();
+		customers.add(new Customer(1, "451263", 10, 2.30, 15)); 
+		customers.add(new Customer(2, "540909", 2, 5.00, 10)); 
+		customers.add(new Customer(2, "909028", 5, 1.20,7)); 
+		customers.add(new Customer(2, "123654", 10, 11.00, 15)); 
+		customers.add(new Customer(3, "541739", 10, 2.3, 20)); 
+
 		
 		System.out.println("\nPat's Restaurant");
 		PatRestaurant patRestaurant = new PatRestaurant(customers);
@@ -38,6 +40,22 @@ public class main {
 		System.out.println(pacRestaurant.getProfit());
 		System.out.println(pacRestaurant.getUnsatisfiedCustomers());
 		System.out.println(pacRestaurant.getCurrentTurn());
+		
+		for(int i=1;i<=100;i++) {
+			if(i%3==0&&i%5==0) {
+				System.out.println("FizzBuzz");
+			}
+			else if(i%5==0) {
+				System.out.println("Buzz");
+			}
+			else if(i%3==0) {
+				System.out.println("Fizz");
+			}
+			else {
+				System.out.println(i);
+			}
+		}
+		
 		
 
 	}
