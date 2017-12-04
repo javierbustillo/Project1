@@ -21,7 +21,6 @@ public class main {
 		File fileName = jfc.getSelectedFile();
 		
 		String fileType = fileName.getPath().substring(fileName.getPath().length()-3);
-		System.out.println(fileType);
 
 		if(fileType.equals("txt")){
 			ArrayList<String> inputs = new ArrayList<String>();
@@ -48,13 +47,12 @@ public class main {
 				
 			while((line = reader.readLine()) != null){
 				String[] s = line.split(",");
-		
+				
 				int arrival = Integer.parseInt(s[0]);
 				String id = s[1];
 				int timeToPrepare = Integer.parseInt(s[2]);
 				double costOfOrder = Double.parseDouble(s[3].substring(1));
 				int patience = Integer.parseInt(s[4]);
-				System.out.println(costOfOrder);
 
 				customersInLine.add(new Customer(arrival, id, timeToPrepare, costOfOrder, patience));
 					
@@ -94,13 +92,13 @@ public class main {
 		max.simulate();
 		pac.simulate();
 		
-		System.out.println("Pat's approach profit: " + pat.getProfit());
+		System.out.printf("Pat's approach profit: %.2f\n", pat.getProfit());
 		System.out.println("Pat's approach number of disappointed customers: " + pat.getUnsatisfiedCustomers());
-		System.out.println("Mat's approach profit: " + mat.getProfit());
+		System.out.printf("Mat's approach profit: %.2f\n",  mat.getProfit());
 		System.out.println("Mat's approach number of disappointed customers: " + mat.getUnsatisfiedCustomers());
-		System.out.println("Max's approach profit: " + mat.getProfit());
-		System.out.println("Max's approach number of disappointed customers: " + mat.getUnsatisfiedCustomers());
-		System.out.println("Pac's approach profit: " + pac.getProfit());
+		System.out.printf("Max's approach profit: %.2f\n", max.getProfit());
+		System.out.println("Max's approach number of disappointed customers: " + max.getUnsatisfiedCustomers());
+		System.out.printf("Pac's approach profit: %.2f\n", pac.getProfit());
 		System.out.println("Pac's approach number of disappointed customers: " + pac.getUnsatisfiedCustomers());
 	}
 		
