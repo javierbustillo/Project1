@@ -92,13 +92,13 @@ public class main {
 		max.simulate();
 		pac.simulate();
 		
-		System.out.printf("Pat's approach profit: %.2f\n", pat.getProfit());
+		System.out.printf("Pat's approach profit: $%.2f\n", pat.getProfit());
 		System.out.println("Pat's approach number of disappointed customers: " + pat.getUnsatisfiedCustomers());
-		System.out.printf("Mat's approach profit: %.2f\n",  mat.getProfit());
+		System.out.printf("Mat's approach profit: $%.2f\n",  mat.getProfit());
 		System.out.println("Mat's approach number of disappointed customers: " + mat.getUnsatisfiedCustomers());
-		System.out.printf("Max's approach profit: %.2f\n", max.getProfit());
+		System.out.printf("Max's approach profit: $%.2f\n", max.getProfit());
 		System.out.println("Max's approach number of disappointed customers: " + max.getUnsatisfiedCustomers());
-		System.out.printf("Pac's approach profit: %.2f\n", pac.getProfit());
+		System.out.printf("Pac's approach profit: $%.2f\n", pac.getProfit());
 		System.out.println("Pac's approach number of disappointed customers: " + pac.getUnsatisfiedCustomers());
 	}
 		
