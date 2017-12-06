@@ -2,6 +2,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
@@ -9,7 +12,8 @@ import java.util.ArrayList;
 
 public class main {
 
-	public static void main(String[] args) {
+
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		ArrayList<Customer> customersInLine = new ArrayList<Customer>();
 		
@@ -27,12 +31,12 @@ public class main {
 			inputs = txtReader(fileName.getPath());
 			for(int i = 0;i<inputs.size();i++){
 				customersInLine = customerReader(fileName.getParent()+"/"+inputs.get(i));
-				output(customersInLine);
+				output(customersInLine, inputs.get(i), fileName);
 			}
 		}
 		else{
 			customersInLine = customerReader(fileName.getPath());
-			output(customersInLine);
+			//output(customersInLine, fileName);
 
 			
 		}
@@ -81,7 +85,17 @@ public class main {
 		
 	}
 	
-	private static void output(ArrayList<Customer> customersInLine){
+	private static double maximum(double[] profits) {
+		double max = profits[0];
+		for(int i=0;i<profits.length;i++) {
+			if(max<profits[i]) {
+				max = profits[i];
+			}
+		}
+		return max;
+	}
+	
+	private static void output(ArrayList<Customer> customersInLine, String inputFileString, File inputFile) throws IOException{
 		PatRestaurant pat = new PatRestaurant(customersInLine);
 		MatRestaurant mat = new MatRestaurant(customersInLine);
 		MaxRestaurant max = new MaxRestaurant(customersInLine);
@@ -92,14 +106,52 @@ public class main {
 		max.simulate();
 		pac.simulate();
 		
-		System.out.printf("Pat's approach profit: $%.2f\n", pat.getProfit());
-		System.out.println("Pat's approach number of disappointed customers: " + pat.getUnsatisfiedCustomers());
-		System.out.printf("Mat's approach profit: $%.2f\n",  mat.getProfit());
-		System.out.println("Mat's approach number of disappointed customers: " + mat.getUnsatisfiedCustomers());
-		System.out.printf("Max's approach profit: $%.2f\n", max.getProfit());
-		System.out.println("Max's approach number of disappointed customers: " + max.getUnsatisfiedCustomers());
-		System.out.printf("Pac's approach profit: $%.2f\n", pac.getProfit());
-		System.out.println("Pac's approach number of disappointed customers: " + pac.getUnsatisfiedCustomers());
+		double[] profits = new double[4];
+		profits[0] = pat.getProfit();
+		profits[1] = mat.getProfit();
+		profits[2] = max.getProfit();
+		profits[3] = pac.getProfit();
+		
+		double[] customersServed = new double[4];
+		customersServed[0] = pat.getCustomers().size() - pat.getUnsatisfiedCustomers();
+		customersServed[1] = mat.getCustomers().size() - mat.getUnsatisfiedCustomers();
+		customersServed[2] = max.getCustomers().size() - max.getUnsatisfiedCustomers();
+		customersServed[3] = pac.getCustomers().size() - pac.getUnsatisfiedCustomers();
+
+		double maxCustomers = maximum(customersServed);
+		double maxProfit = maximum(profits);
+		
+		
+		String maximumProfits = "Maximum profit possible: $" + String.format("%.2f", maxProfit);
+		String maximumCustomers = "Maximum number of customers served possible: "+ String.format("%.0f", maxCustomers) ;
+		
+		String patStringProfit = "Pat's approach profit: $" + String.format("%.2f", pat.getProfit());
+		String patStringCustomers = "Pat's approach number of disappointed customers: " + pat.getUnsatisfiedCustomers();
+		
+		String matStringProfit = "Mat's approach profit: $" + String.format("%.2f", mat.getProfit());
+		String matStringCustomers = "Mat's approach number of disappointed customers: " + mat.getUnsatisfiedCustomers();
+		
+		String maxStringProfit = "Max's approach profit: $" + String.format("%.2f", max.getProfit());
+		String maxStringCustomers = "Max's approach number of disappointed customers: " + max.getUnsatisfiedCustomers();
+
+		String pacStringProfit = "Pac's approach profit: $" + String.format("%.2f", pac.getProfit());
+		String pacStringCustomers = "Pac's approach number of disappointed customers: " + pac.getUnsatisfiedCustomers();
+	
+		String outputContent = maximumProfits + "\n" + maximumCustomers + "\n" + patStringProfit + "\n" + patStringCustomers + "\n" + matStringProfit +"\n" + matStringCustomers + "\n" + maxStringProfit + "\n" + maxStringCustomers + "\n" + pacStringProfit + "\n" + pacStringCustomers;
+		
+		String fileName = inputFileString.substring(0, inputFileString.length()-4);
+		
+		String outputPathString = inputFile.getParent()+"/"+fileName+".out";
+		System.out.println(fileName);
+		
+		Path inputPath = Paths.get(outputPathString);
+		Path dirPath = Paths.get(inputFile.getParent());
+		Path fullPath = dirPath.resolve(inputPath);
+		
+		Files.write(fullPath, outputContent.getBytes());
+		System.out.println(fullPath.toString());
+		
+		
 	}
 		
 }
