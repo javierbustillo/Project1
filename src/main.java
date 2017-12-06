@@ -36,7 +36,7 @@ public class main {
 		}
 		else{
 			customersInLine = customerReader(fileName.getPath());
-			//output(customersInLine, fileName);
+			output(customersInLine,fileName.getName(), fileName);
 
 			
 		}
