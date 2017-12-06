@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 public class main {
 
+	static ArrayList<Customer> customersInLine = new ArrayList<Customer>();
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		ArrayList<Customer> customersInLine = new ArrayList<Customer>();
 		
 
 		JFileChooser jfc = new JFileChooser();
@@ -85,12 +85,10 @@ public class main {
 		
 	}
 	
-	private static double maximum(double[] profits) {
-		double max = profits[0];
-		for(int i=0;i<profits.length;i++) {
-			if(max<profits[i]) {
-				max = profits[i];
-			}
+	private static double maximumProf(ArrayList<Customer> customers) {
+		double max = 0;
+		for(int i=0;i<customers.size();i++) {
+			max+=customers.get(i).getCostOfOrder();
 		}
 		return max;
 	}
@@ -105,21 +103,9 @@ public class main {
 		mat.simulate();
 		max.simulate();
 		pac.simulate();
-		
-		double[] profits = new double[4];
-		profits[0] = pat.getProfit();
-		profits[1] = mat.getProfit();
-		profits[2] = max.getProfit();
-		profits[3] = pac.getProfit();
-		
-		double[] customersServed = new double[4];
-		customersServed[0] = pat.getCustomers().size() - pat.getUnsatisfiedCustomers();
-		customersServed[1] = mat.getCustomers().size() - mat.getUnsatisfiedCustomers();
-		customersServed[2] = max.getCustomers().size() - max.getUnsatisfiedCustomers();
-		customersServed[3] = pac.getCustomers().size() - pac.getUnsatisfiedCustomers();
 
-		double maxCustomers = maximum(customersServed);
-		double maxProfit = maximum(profits);
+		double maxCustomers = customersInLine.size();
+		double maxProfit = maximumProf(customersInLine);
 		
 		
 		String maximumProfits = "Maximum profit possible: $" + String.format("%.2f", maxProfit);
