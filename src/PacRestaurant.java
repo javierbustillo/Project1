@@ -31,10 +31,13 @@ public class PacRestaurant extends Restaurant {
 	@Override
 	public void updateCustomerStatus() {
 		// TODO Auto-generated method stub
-		while(!customersInLine.isEmpty()&&customersInLine.get(0).getArrival()+customersInLine.get(0).getPatience()<currentTurn){
-			customersInLine.remove(0);
-			unsatisfiedCustomers++;
-			customersInRestaurant--;
+		for(int i=0;i<customersInLine.size();i++) {
+			if((customersInLine.get(i).getArrival() + customersInLine.get(i).getPatience()) <= this.getCurrentTurn()) {
+				customersInLine.remove(i);
+				customersInRestaurant--;
+				unsatisfiedCustomers++;
+				i=-1;
+			}
 		}
 	}
 
