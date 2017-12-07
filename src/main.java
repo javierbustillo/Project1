@@ -17,30 +17,15 @@ public class main {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		
-
-		JFileChooser jfc = new JFileChooser();
-		jfc.showDialog(null, "Choose file");
-		jfc.setVisible(true);
+		File fileName = new File("input.txt");
 		
-		File fileName = jfc.getSelectedFile();
+		ArrayList<String> inputs = new ArrayList<String>();
+		inputs = txtReader(fileName.getPath());
 		
-		String fileType = fileName.getPath().substring(fileName.getPath().length()-3);
-
-		if(fileType.equals("txt")){
-			ArrayList<String> inputs = new ArrayList<String>();
-			inputs = txtReader(fileName.getPath());
-			for(int i = 0;i<inputs.size();i++){
-				customersInLine = customerReader(fileName.getParent()+"/"+inputs.get(i));
-				output(customersInLine, inputs.get(i), fileName);
-			}
+		for(int i = 0;i<inputs.size();i++){
+			customersInLine = customerReader(inputs.get(i));
+			output(customersInLine, inputs.get(i));
 		}
-		else{
-			customersInLine = customerReader(fileName.getPath());
-			output(customersInLine,fileName.getName(), fileName);
-
-			
-		}
-		
 	}
 		
 		
@@ -78,11 +63,9 @@ public class main {
 			}
 		}
 		catch(IOException e){
-				
+		
 		}
-		
 		return inputs;
-		
 	}
 	
 	private static double maximumProf(ArrayList<Customer> customers) {
@@ -93,7 +76,7 @@ public class main {
 		return max;
 	}
 	
-	private static void output(ArrayList<Customer> customersInLine, String inputFileString, File inputFile) throws IOException{
+	private static void output(ArrayList<Customer> customersInLine, String inputFileString) throws IOException{
 		PatRestaurant pat = new PatRestaurant(customersInLine);
 		MatRestaurant mat = new MatRestaurant(customersInLine);
 		MaxRestaurant max = new MaxRestaurant(customersInLine);
@@ -127,16 +110,9 @@ public class main {
 		
 		String fileName = inputFileString.substring(0, inputFileString.length()-4);
 		
-		String outputPathString = inputFile.getParent()+"/"+fileName+".out";
-		System.out.println(fileName);
+		Path outputPath = Paths.get(fileName+".out");
 		
-		Path inputPath = Paths.get(outputPathString);
-		Path dirPath = Paths.get(inputFile.getParent());
-		Path fullPath = dirPath.resolve(inputPath);
-		
-		Files.write(fullPath, outputContent.getBytes());
-		System.out.println(fullPath.toString());
-		
+		Files.write(outputPath, outputContent.getBytes());
 		
 	}
 		
