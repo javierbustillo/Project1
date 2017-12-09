@@ -23,7 +23,7 @@ public class PatRestaurant extends Restaurant {
 	@Override
 	public void updateCustomerStatus() {
 	
-		while(!restaurantQueue.isEmpty()&&restaurantQueue.first().getArrival()+restaurantQueue.first().getPatience()<currentTurn){
+		while(!restaurantQueue.isEmpty()&&restaurantQueue.first().getArrival()+restaurantQueue.first().getPatience()<=currentTurn){
 				restaurantQueue.dequeue();
 				unsatisfiedCustomers++;
 				customersInRestaurant--;

@@ -21,6 +21,9 @@ public class MatRestaurant extends Restaurant {
 	@Override
 	public void updateCustomerStatus() {
 		Boolean takeOrder = false;
+		
+		
+		
 		do {
 			if(customerLine.top() == null) {
 				takeOrder = true;
@@ -28,7 +31,7 @@ public class MatRestaurant extends Restaurant {
 			}
 			else {
 				
-				if((customerLine.top().getArrival() + customerLine.top().getPatience()) < this.getCurrentTurn()) {
+				if((customerLine.top().getArrival() + customerLine.top().getPatience()) <= this.getCurrentTurn()) {
 					customerLine.pop();
 					customersInRestaurant--;
 					unsatisfiedCustomers++;

@@ -137,21 +137,33 @@ public abstract class Restaurant {
 		return customers;
 	}
 	
+	/*
+	 * @param profit value that is received is added to the total profit
+	 */
 	public void addToProfit(double profit) {
 		this.profit += profit;
 	}
-	
+	/*
+	 * @param wait replaces the current wait value
+	 */
 	public void setWait(int wait) {
 		this.wait = wait;
 	}
-	
+	/*
+	 * @return wait the current wait
+	 */
 	public int getWait() {
 		return wait;
 	}
-	
+	/*
+	 * @param size replaces the current amount of customers in restaurant
+	 */
 	public void setCustomersInRestaurant(int size) {
 		customersInRestaurant = size;
 	}
+	/*
+	 * @return customersInRestaurant the amount of customers in the restaurant
+	 */
 	
 	public int getCustomersInRestaurant() {
 		return customersInRestaurant;
